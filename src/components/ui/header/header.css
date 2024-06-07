@@ -1,0 +1,149 @@
+body {
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.light-mode {
+    background-color: white;
+    color: black;
+}
+
+body.dark-mode {
+    background-color: black;
+    color: white;
+    .card {
+        background: #000;
+        color: #fff;
+    }
+    .card-header {
+        background: #c31c1c79;
+    }
+}
+
+.header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    padding: 20px 0;
+    margin-bottom: 50px;
+    background: black;
+    z-index: 1001;
+    transition: padding 0.3s ease;
+}
+
+.header.shrink {
+    padding: 15px 0;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-item a {
+    transition: 0.4s;
+    border: 2px solid transparent;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 16px;
+    font-weight: 400;
+    color: white;
+}
+
+.nav-item a:hover {
+    opacity: 0.7;
+}
+
+.nav-item .active {
+    border-color: #0081ff;
+    color: #0081ff;
+}
+
+.nav-item .module-btn2 {
+    border-color: #0081ff;
+    color: red;
+}
+
+.nav__btn {
+    background: transparent;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+}
+
+.nav-logo-img {
+    width: 130px;
+}
+
+.nav__img {
+    border: none;
+    background: transparent;
+    border-radius: 50%;
+}
+
+.container-header {
+    padding: 0px 20px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.input-group {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: space-between;
+    width: 300px;
+}
+
+.input {
+    max-width: 170px;
+    padding: 8px 16px 8px 40px;
+    color: #fff;
+    border: none;
+    outline: none;
+    border-radius: 85px;
+    background: rgba(244, 251, 255, 0.1);
+    backdrop-filter: blur(250px);
+    z-index: 5;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.input::placeholder {
+    color: #fff;
+    text-align: center;
+}
+
+.search-wrapper {
+    position: relative;
+}
+
+.search-icon {
+    position: absolute;
+    z-index: 10;
+    top: 25%;
+    left: 10px;
+}
+@media (max-width: 900px) {
+    .nav-logo-img {
+        display: none;
+    }
+    .input-group {
+        width: 100%;
+        justify-content: center;
+    }
+    .input-group {
+        justify-content: space-around;
+    }
+}
+
+@media (max-width: 450px) {
+    .search-wrapper {
+        display: none;
+    }
+    .input-group {
+        justify-content: space-around;
+    }
+}

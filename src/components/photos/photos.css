@@ -1,0 +1,23 @@
+.photos {
+    width: 300px;
+    text-align: center;
+    border: solid 2px red;
+    display: flex;
+}
+.foto {
+    border: 1px solid #ccc;
+    padding: 16px;
+    text-align: center;
+    height: 100%;
+}
+
+.foto img {
+    max-width: 100%;
+    height: auto;
+}
+
+@media (max-width: 450px) {
+    .foto img {
+        height: 150px; 
+    }
+}

@@ -1,0 +1,14 @@
+.layout {
+    display: grid;
+    grid-template-columns: 2fr 8fr;
+    width: 100%;
+}
+
+.main {
+    padding: 20px;
+    padding-top: 100px;
+}
+
+.headdd {
+    width: 100%;
+}

@@ -1,0 +1,29 @@
+tr {
+    span {
+        display: none;
+        font-size: 16px;
+        font-weight: 500;
+    }
+}
+@media (max-width: 850px) {
+    tbody {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    thead {
+        display: none;
+    }
+    tr {
+        display: flex;
+        flex-direction: column;
+        span {
+            display: block;
+        }
+        td {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+}
