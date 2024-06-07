@@ -1,8 +1,18 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import prev from "@img/prev.svg";
-import next from "@img/next.svg";
-import Rolling from "@img/rolling.svg";
+import axios from "axios";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import CircularProgress from "@mui/material/CircularProgress";
+import { Typography } from "@mui/material";
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 const Todos = () => {
     const [todos, setTodos] = useState([]);
@@ -85,80 +95,95 @@ const Todos = () => {
 
     if (loading) {
         return (
-            <h3 style={{ textAlign: "center", marginTop: "20px" }}>
-                <img src={Rolling} alt="Loading..." />
-            </h3>
+            <div style={{ textAlign: "center", marginTop: "20px" }}>
+                <CircularProgress />
+            </div>
         );
     }
 
     return (
-        <div className="todos">
-            <table className="table table-bordered table-hover table-striped overflow-x-auto table-primary">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Title</th>
-                        <th>Completed</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {todos.map((item) => (
-                        <tr key={item.id}>
-                            <td>{item.id}</td>
-                            <td>
-                                {editingId === item.id ? (
-                                    <input
-                                        className="form-control w-50"
-                                        type="text"
-                                        value={editingTitle}
-                                        onChange={(e) =>
-                                            setEditingTitle(e.target.value)
-                                        }
-                                    />
-                                ) : (
-                                    item.title
-                                )}
-                            </td>
-                            <td>{item.completed ? "Yes" : "No"}</td>
-                            <td>
-                                {editingId === item.id ? (
-                                    <button
-                                        type="submit"
-                                        className="btn btn-success m-1"
-                                        onClick={() => saveEdit(item.id)}>
-                                        Save
-                                    </button>
-                                ) : (
-                                    <button
-                                        className="btn btn-info m-1 responsive"
-                                        onClick={() =>
-                                            startEditing(item.id, item.title)
-                                        }>
-                                        Edit
-                                    </button>
-                                )}
-                                <button
-                                    className="btn btn-danger mx-1 responsive"
-                                    onClick={() => deleteTodo(item.id)}>
-                                    Delete
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-            <div className="card-footer d-flex justify-content-center pt-2">
-                <button
+        <div>
+            <TableContainer component={Paper}>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>ID</TableCell>
+                            <TableCell>Title</TableCell>
+                            <TableCell>Completed</TableCell>
+                            <TableCell>Actions</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {todos.map((item) => (
+                            <TableRow key={item.id}>
+                                <TableCell>{item.id}</TableCell>
+                                <TableCell>
+                                    {editingId === item.id ? (
+                                        <TextField
+                                            value={editingTitle}
+                                            onChange={(e) =>
+                                                setEditingTitle(e.target.value)
+                                            }
+                                        />
+                                    ) : (
+                                        item.title
+                                    )}
+                                </TableCell>
+                                <TableCell>
+                                    {item.completed ? "Yes" : "No"}
+                                </TableCell>
+                                <TableCell>
+                                    {editingId === item.id ? (
+                                        <Button
+                                            variant="contained"
+                                            color="success"
+                                            onClick={() => saveEdit(item.id)}>
+                                            Save
+                                        </Button>
+                                    ) : (
+                                        <Button
+                                            className="m-2"
+                                            variant="contained"
+                                            color="info"
+                                            onClick={() =>
+                                                startEditing(
+                                                    item.id,
+                                                    item.title
+                                                )
+                                            }>
+                                            Edit
+                                        </Button>
+                                    )}
+                                    <Button
+                                        className="m-2"
+                                        variant="contained"
+                                        color="error"
+                                        onClick={() => deleteTodo(item.id)}>
+                                        Delete
+                                    </Button>
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            <div style={{ textAlign: "center", marginTop: "10px" }}>
+                <Button
+                    className="m-2"
+                    variant="contained"
+                    color="primary"
                     onClick={handlePreviousPage}
-                    className="btn btn-primary"
                     disabled={currentPage === 1}>
-                    <img src={prev} alt="prev icon" />
-                </button>
-                <span className="btn btn-info mx-2">Page {currentPage}</span>
-                <button onClick={handleNextPage} className="btn btn-primary">
-                    <img src={next} alt="next icon" />
-                </button>
+                    <NavigateBeforeIcon />
+                </Button>
+                <Typography variant="button">Page {currentPage}</Typography>
+                <Button
+                    className="m-2"
+                    variant="contained"
+                    color="primary"
+                    onClick={handleNextPage}>
+                    <NavigateNextIcon />
+                </Button>
             </div>
         </div>
     );

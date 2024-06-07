@@ -1,9 +1,17 @@
+import * as React from "react";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import prev from "@img/prev.svg";
 import next from "@img/next.svg";
 import Rolling from "@img/rolling.svg";
-import "./users.css";
+// import "./users.css";
 
 const Users = () => {
     const [users, setUsers] = useState([]);
@@ -45,36 +53,41 @@ const Users = () => {
 
     return (
         <div className="users">
-            <table className="table table-bordered table-hover table-striped overflow-x-auto table-primary">
-                <thead>
-                    <tr>
-                        <th>T/R</th>
-                        <th>Name</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>City</th>
-                        <th>Street</th>
-                        <th>Phone</th>
-                        <th>Website</th>
-                        <th>Company name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {users.map((user) => (
-                        <tr key={user.id}>
-                            <td><span>Id</span>{user.id}</td>
-                            <td><span>Name</span>{user.name}</td>
-                            <td><span>Username</span>{user.username}</td>
-                            <td><span>Email</span>{user.email}</td>
-                            <td><span>Address</span>{user.address.city}</td>
-                            <td><span>Street</span>{user.address.street}</td>
-                            <td><span>Phone</span>{user.phone}</td>
-                            <td><span>Website</span>{user.website}</td>
-                            <td><span>Company</span>{user.company.name}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+            <TableContainer component={Paper}>
+                <Table
+                    sx={{ minWidth: 650 }}
+                    size="small"
+                    aria-label="user table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>T/R</TableCell>
+                            <TableCell>Name</TableCell>
+                            <TableCell>Username</TableCell>
+                            <TableCell>Email</TableCell>
+                            <TableCell>City</TableCell>
+                            <TableCell>Street</TableCell>
+                            <TableCell>Phone</TableCell>
+                            <TableCell>Website</TableCell>
+                            <TableCell>Company name</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {users.map((user) => (
+                            <TableRow key={user.id}>
+                                <TableCell>{user.id}</TableCell>
+                                <TableCell>{user.name}</TableCell>
+                                <TableCell>{user.username}</TableCell>
+                                <TableCell>{user.email}</TableCell>
+                                <TableCell>{user.address.city}</TableCell>
+                                <TableCell>{user.address.street}</TableCell>
+                                <TableCell>{user.phone}</TableCell>
+                                <TableCell>{user.website}</TableCell>
+                                <TableCell>{user.company.name}</TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
             <div className="card-footer d-flex justify-content-center pt-2">
                 <button
                     onClick={handlePreviousPage}

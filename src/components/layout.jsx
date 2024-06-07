@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import AppBar from "@mui/material/AppBar";
@@ -16,11 +14,6 @@ import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import routes from "../router/routes";
-import Logo from "@img/navLogo.svg";
-import Login from "@img/login.png";
-import Burger from "@img/sun-regular.svg";
-import Moon from "@img/moon-solid.svg";
-import Search from "@img/search.svg";
 import "../components/ui/header/header.css";
 
 const drawerWidth = 240;
@@ -31,6 +24,17 @@ function ResponsiveDrawer(props) {
     const [mobileOpen, setMobileOpen] = useState(false);
     const [isClosing, setIsClosing] = useState(false);
     const [darkMode, setDarkMode] = useState(false);
+
+    const toggleDarkMode = () => {
+        setDarkMode(!darkMode);
+        if (!darkMode) {
+            document.body.classList.add("dark-mode");
+            document.body.classList.remove("light-mode");
+        } else {
+            document.body.classList.add("light-mode");
+            document.body.classList.remove("dark-mode");
+        }
+    };
 
     const handleDrawerClose = () => {
         setIsClosing(true);
@@ -44,17 +48,6 @@ function ResponsiveDrawer(props) {
     const handleDrawerToggle = () => {
         if (!isClosing) {
             setMobileOpen(!mobileOpen);
-        }
-    };
-
-    const toggleDarkMode = () => {
-        setDarkMode(!darkMode);
-        if (!darkMode) {
-            document.body.classList.add("dark-mode");
-            document.body.classList.remove("light-mode");
-        } else {
-            document.body.classList.add("light-mode");
-            document.body.classList.remove("dark-mode");
         }
     };
 
@@ -102,49 +95,6 @@ function ResponsiveDrawer(props) {
 
     const container =
         window !== undefined ? () => window().document.body : undefined;
-
-    const Header = () => (
-        <header className="header">
-            <div className="container-header">
-                <nav className="nav container">
-                    <NavLink to="/">
-                        <img src={Logo} className="nav-logo-img" alt="Logo" />
-                    </NavLink>
-                    <div className="input-group">
-                        <div className="search-wrapper">
-                            <img
-                                src={Search}
-                                alt="search icon"
-                                className="search-icon"
-                            />
-                            <input
-                                type="text"
-                                className="input"
-                                placeholder="Search"
-                            />
-                        </div>
-                        <button className="nav__btn">
-                            <NavLink to={"/"}>
-                                <img
-                                    src={Login}
-                                    alt="Login"
-                                    className="nav__img"
-                                />
-                            </NavLink>
-                        </button>
-                        <button className="nav__btn" onClick={toggleDarkMode}>
-                            <img
-                                src={darkMode ? Burger : Moon}
-                                alt="toggle dark mode"
-                                className="nav__img"
-                            />
-                        </button>
-                    </div>
-                </nav>
-            </div>
-        </header>
-    );
-
     return (
         <Box sx={{ display: "flex" }}>
             <CssBaseline />
@@ -154,7 +104,6 @@ function ResponsiveDrawer(props) {
                     width: { sm: `calc(100% ` },
                     ml: { sm: `${drawerWidth}px` },
                 }}>
-
                 <Toolbar>
                     <IconButton
                         color="inherit"
@@ -164,6 +113,7 @@ function ResponsiveDrawer(props) {
                         sx={{ mr: 2, display: { sm: "none" } }}>
                         <MenuIcon />
                     </IconButton>
+                    <Typography><h1>Header</h1></Typography>
                 </Toolbar>
             </AppBar>
             <Box
